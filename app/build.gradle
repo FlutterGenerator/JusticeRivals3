@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 34
+    namespace 'uk.lgl'
+    defaultConfig {
+        applicationId "uk.lgl"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 14
+        versionName "2.9"
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+        signingConfig signingConfigs.debug
+    }
+    buildTypes {
+        release {
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
+        }
+    }
+}
+
+//dependencies must be placed below 'android' brackets to get it work on AIDE
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

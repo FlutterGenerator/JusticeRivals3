@@ -1,0 +1,90 @@
+private View Spinner(final int featNum, final String featName, final String list) {
+        Log.d(TAG, "spinner " + featNum + " " + featName + " " + list);
+        final List<String> lists = new LinkedList<>(Arrays.asList(list.split(",")));
+
+        LinearLayout mainLayout = new LinearLayout(this);
+        LinearLayout.LayoutParams mainLayoutParams = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
+        mainLayoutParams.setMargins(7, 2, 7, 5);
+        mainLayout.setOrientation(LinearLayout.HORIZONTAL);
+        mainLayout.setBackgroundColor(Color.TRANSPARENT);
+        mainLayout.setLayoutParams(mainLayoutParams);
+        
+        RelativeLayout relativeLayout = new RelativeLayout(this);
+        LinearLayout.LayoutParams relativeLayoutParams = new LinearLayout.LayoutParams(0, WRAP_CONTENT, 1);
+        relativeLayout.setBackgroundColor(Color.WHITE);  
+        relativeLayout.setLayoutParams(relativeLayoutParams);
+
+        
+        final TextView selectedItemView = new TextView(this);
+        selectedItemView.setId(View.generateViewId());
+        selectedItemView.setTextColor(Color.BLACK); 
+        selectedItemView.setTextSize(18);  
+        selectedItemView.setGravity(Gravity.CENTER);
+        RelativeLayout.LayoutParams textViewParams = new RelativeLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
+        textViewParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        selectedItemView.setLayoutParams(textViewParams);
+        relativeLayout.addView(selectedItemView);
+
+        final Spinner spinner = new Spinner(this, Spinner.MODE_DROPDOWN);
+        spinner.setId(View.generateViewId());
+        RelativeLayout.LayoutParams spinnerParams = new RelativeLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
+        spinnerParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        spinner.setLayoutParams(spinnerParams);
+        spinner.getBackground().setColorFilter(new PorterDuffColorFilter(Color.TRANSPARENT, PorterDuff.Mode.CLEAR));
+
+        ArrayAdapter<String> aa = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, lists);
+    //    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+       spinner.setAdapter(aa);
+        spinner.setSelection(Preferences.loadPrefInt(featName, featNum));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemViewSpinner, int position, long id) {
+                    Preferences.changeFeatureInt(spinner.getSelectedItem().toString(), featNum, position);
+                    ((TextView) parentView.getChildAt(0)).setTextColor(Color.TRANSPARENT); 
+                    selectedItemView.setText(spinner.getSelectedItem().toString());
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+        selectedItemView.setText(lists.get(spinner.getSelectedItemPosition()));
+        Button leftButton = new Button(this);
+        leftButton.setText("<<");
+        leftButton.setBackgroundColor(BTN_COLOR);
+        leftButton.setTextColor(Color.BLACK);
+        leftButton.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
+        leftButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int currentPosition = spinner.getSelectedItemPosition();
+                    if (currentPosition > 0) {
+                        spinner.setSelection(currentPosition - 1);
+                    }
+                }
+            });
+
+        Button rightButton = new Button(this);
+        rightButton.setText(">>");
+        rightButton.setBackgroundColor(BTN_COLOR);
+        rightButton.setTextColor(Color.BLACK);
+        rightButton.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
+        rightButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int currentPosition = spinner.getSelectedItemPosition();
+                    if (currentPosition < lists.size() - 1) {
+                        spinner.setSelection(currentPosition + 1);
+                    }
+                }
+            });
+        relativeLayout.addView(spinner);
+
+        mainLayout.addView(leftButton);
+        mainLayout.addView(relativeLayout);
+        mainLayout.addView(rightButton);
+
+        return mainLayout;
+    }
