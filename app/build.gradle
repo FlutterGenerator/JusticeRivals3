@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdkVersion 34
-    namespace 'uk.lgl'
+    namespace "uk.lgl"
     defaultConfig {
         applicationId "uk.lgl"
         minSdkVersion 21
