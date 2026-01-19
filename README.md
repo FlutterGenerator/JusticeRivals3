@@ -1,6 +1,8 @@
 # Justice Rivals 3
 [![Justice Rivals 3 Build](https://github.com/FlutterGenerator/JusticeRivals3/actions/workflows/build-apk.yml/badge.svg)](https://github.com/FlutterGenerator/JusticeRivals3/actions/workflows/build-apk.yml)
 
+[![License Info](https://img.shields.io/badge/License-GPL--3.0-blue.svg?style=flat-square)](https://github.com/FlutterGenerator/JusticeRivals3/blob/master/LICENSE)
+
 # Justice Rivals 3 Version: (198) – 1.200f8
 **Google Play Release Date:** 17 December 2025
 
