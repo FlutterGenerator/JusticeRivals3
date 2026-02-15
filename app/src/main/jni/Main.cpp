@@ -62,9 +62,9 @@ void *hack_thread(void *) {
     LOGI(OBFUSCATE("Done"));
 #endif
 
-    hexPatches.Unliammo = MemoryPatch::createWithHex("libil2cpp.so", 0x11B3164, "00000CE3790444E31EFF2FE1");
-    hexPatches.UnliMONEY = MemoryPatch::createWithHex("libil2cpp.so", 0x11A2BCC, "0201E0E31EFF2FE1");
-    hexPatches.InfinyMAGAZINE = MemoryPatch::createWithHex("libil2cpp.so", 0x11B3B90, "E70300E31EFF2FE1");
+    hexPatches.Unliammo = MemoryPatch::createWithHex("libil2cpp.so", 0x12DA560, "00000CE3790444E31EFF2FE1");
+    hexPatches.UnliMONEY = MemoryPatch::createWithHex("libil2cpp.so", 0x12D948C, "0201E0E31EFF2FE1");
+    hexPatches.InfinyMAGAZINE = MemoryPatch::createWithHex("libil2cpp.so", 0x12DAF8C, "E70300E31EFF2FE1");
     
     return NULL;
 }
