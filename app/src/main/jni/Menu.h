@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL
 Java_uk_lgl_modmenu_FloatingModMenuService_setHeadingText(JNIEnv *env, jobject thiz, jobject obj) {
     setText(env, obj, OBFUSCATE("<b><marquee><p style=\"font-size:30\">"
                                       "<p style=\"color:green;\">Justice Rivals 3</p> | "
-                                      "Version | (198) | 1.200f8</p>"
+                                      "Version | (206) | 1.201</p>"
                                       "</marquee></b>"));
                                       
     headingValid = true;
